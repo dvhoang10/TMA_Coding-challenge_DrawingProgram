@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace DrawingProgram.Canvas.Commands
 {
-    internal class CreateLineCommand : ICommand<CanvasItem>
+    internal class CreateRectangleCommand : ICommand<CanvasItem>
     {
         private PointItem _startPoint, _endPoint;
         private CanvasItem _canvas;
 
-        public CreateLineCommand(CanvasItem canvas)
+        public CreateRectangleCommand(CanvasItem canvas)
         {
             if (canvas == null) throw new ArgumentNullException("Please create a canvas");
             _canvas = canvas;
@@ -39,18 +39,16 @@ namespace DrawingProgram.Canvas.Commands
 
         public CanvasItem ExecuteCommand()
         {
-            if (_startPoint.x == _endPoint.x)
+            for (int i = _startPoint.y; i <= _endPoint.y; i++)
             {
-                for (int i = _startPoint.y; i <= _endPoint.y; i++)
+                for (int j = _startPoint.x; j <= _endPoint.x; j++)
                 {
-                    _canvas.cells[_startPoint.x, i] = CanvasItem.lineChar;
-                }
-            }
-            else if (_startPoint.y == _endPoint.y)
-            {
-                for (int i = _startPoint.x; i <= _endPoint.x; i++)
-                {
-                    _canvas.cells[i, _startPoint.y] = CanvasItem.lineChar;
+                    if (i == _startPoint.y || i == _endPoint.y
+                        || j == _startPoint.x || j == _endPoint.x)
+                    {
+                        _canvas.cells[j, i] = CanvasItem.lineChar;
+                    }
+                    else _canvas.cells[j, i] = ' ';
                 }
             }
             return _canvas;

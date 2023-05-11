@@ -42,10 +42,13 @@ namespace DrawingProgram
         {
             Console.WriteLine("Instruct");
             Console.WriteLine("C w h           Should create a new canvas of width w and height h.");
-            Console.WriteLine("L x1 y1 x2 y2   Should create a new line from (x1, y1) to (x2, y2).\n" +
-                "\t\tCurrently only horizontal or vertical lines are supported.\n" +
-                "\t\tHorizontal and vertical lines will be drawn using the 'x' character.");
-            Console.WriteLine("Q               Quit the program");
+            Console.WriteLine(@"L x1 y1 x2 y2   Should create a new line from (x1, y1) to (x2, y2).
+                Currently only horizontal or vertical lines are supported.
+                Horizontal and vertical lines will be drawn using the 'x' character.");
+            Console.WriteLine(@"R x1 y1 x2 y2   Should create a new rectangle, whose upper left corner 
+                is (x1, y1) and lower right corner is (x2, y2). 
+                Horizontal and vertical lines will be drawn using the 'x' character.");
+            Console.WriteLine("Q               Quit the program.");
         }
     }
 }
