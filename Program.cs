@@ -1,6 +1,6 @@
-﻿using DrawingProgram.Canvas;
-using DrawingProgram.Draws;
+﻿using DrawingProgram.Draws;
 using DrawingProgram.Interfaces;
+using DrawingProgram.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

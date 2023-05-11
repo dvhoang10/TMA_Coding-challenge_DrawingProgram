@@ -1,6 +1,6 @@
-﻿using DrawingProgram.Canvas;
-using DrawingProgram.Canvas.Commands;
+﻿using DrawingProgram.Canvas.Commands;
 using DrawingProgram.Interfaces;
+using DrawingProgram.Models;
 using System;
 
 namespace DrawingProgram
@@ -13,6 +13,8 @@ namespace DrawingProgram
             {
                 case "C":
                     return new CreateCanvasCommand();
+                case "L":
+                    return new CreateLineCommand(canvas);
                 case "Q":
                     Environment.Exit(0);
                     return null;

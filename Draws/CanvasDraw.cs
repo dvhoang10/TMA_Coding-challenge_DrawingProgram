@@ -1,5 +1,5 @@
-﻿using DrawingProgram.Canvas;
-using DrawingProgram.Interfaces;
+﻿using DrawingProgram.Interfaces;
+using DrawingProgram.Models;
 using System.Text;
 
 namespace DrawingProgram.Draws

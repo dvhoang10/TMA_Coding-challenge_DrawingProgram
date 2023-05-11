@@ -1,9 +1,10 @@
-﻿namespace DrawingProgram.Canvas
+﻿namespace DrawingProgram.Models
 {
     internal class CanvasItem
     {
         public static char horizontalChar = '-';
         public static char verticalChar = '|';
+        public static char lineChar = 'x';
         public int width { get; }
         public int height { get; }
         public char[,] cells { get; }
