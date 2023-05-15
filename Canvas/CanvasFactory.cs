@@ -17,6 +17,8 @@ namespace DrawingProgram
                     return new CreateLineCommand(canvas);
                 case "R":
                     return new CreateRectangleCommand(canvas);
+                case "B":
+                    return new BulketFillCommand(canvas);
                 case "Q":
                     Environment.Exit(0);
                     return null;

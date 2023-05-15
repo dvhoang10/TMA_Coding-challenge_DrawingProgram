@@ -48,6 +48,8 @@ namespace DrawingProgram
             Console.WriteLine(@"R x1 y1 x2 y2   Should create a new rectangle, whose upper left corner 
                 is (x1, y1) and lower right corner is (x2, y2). 
                 Horizontal and vertical lines will be drawn using the 'x' character.");
+            Console.WriteLine(@"B x y c         Should fill the entire area connected to (x, y) with color c. 
+                The behavior of this is the same as that of the ""bucket fill"" tool in paint programs.");
             Console.WriteLine("Q               Quit the program.");
         }
     }

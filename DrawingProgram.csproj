@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Canvas\Commands\BulketFillCommand.cs" />
     <Compile Include="Canvas\Commands\CreateRectangleCommand.cs" />
     <Compile Include="Models\CanvasItem.cs" />
     <Compile Include="Canvas\CanvasFactory.cs" />
