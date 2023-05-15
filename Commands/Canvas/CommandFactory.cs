@@ -5,9 +5,9 @@ using System;
 
 namespace DrawingProgram
 {
-    internal class CanvasFactory
+    internal class CommandFactory
     {
-        public static ICommand<CanvasItem> CreateCanvas(string cmd, CanvasItem canvas)
+        public static ICommand<CanvasItem> CreateCommand(string cmd, CanvasItem canvas)
         {
             switch (cmd.ToUpper())
             {
@@ -20,8 +20,7 @@ namespace DrawingProgram
                 case "B":
                     return new BulketFillCommand(canvas);
                 case "Q":
-                    Environment.Exit(0);
-                    return null;
+                    return new QuitProgramCommand();
                 default:
                     throw new ArgumentException("Command is not supported!");
             }

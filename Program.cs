@@ -1,4 +1,5 @@
-﻿using DrawingProgram.Draws;
+﻿using DrawingProgram.Commands;
+using DrawingProgram.Draws;
 using DrawingProgram.Interfaces;
 using DrawingProgram.Models;
 using System;
@@ -20,9 +21,9 @@ namespace DrawingProgram
                     Console.Write("\nPlease enter the command: ");
                     List<string> input = Console.ReadLine().Split(' ').ToList();
 
-                    ICommand<CanvasItem> command = CanvasFactory.CreateCanvas(input[0], canvas);
-                    command.ValidateCommand(input.Skip(1).ToList());
-                    canvas = command.ExecuteCommand();
+                    CommandController controller = new CommandController(CommandFactory.CreateCommand(input[0], canvas));
+                    controller.Validate(input.Skip(1).ToList());
+                    canvas = controller.Execute();
 
                     CanvasDraw canvasDraw = new CanvasDraw();
                     Console.WriteLine(canvasDraw.Draw(canvas));

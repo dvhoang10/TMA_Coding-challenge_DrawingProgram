@@ -43,12 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvas\Commands\BulketFillCommand.cs" />
-    <Compile Include="Canvas\Commands\CreateRectangleCommand.cs" />
+    <Compile Include="Commands\Canvas\Execute\BulketFillCommand.cs" />
+    <Compile Include="Commands\Canvas\Execute\CreateRectangleCommand.cs" />
+    <Compile Include="Commands\Canvas\Execute\QuitProgramCommand.cs" />
+    <Compile Include="Commands\CommandController.cs" />
     <Compile Include="Models\CanvasItem.cs" />
-    <Compile Include="Canvas\CanvasFactory.cs" />
-    <Compile Include="Canvas\Commands\CreateCanvasCommand.cs" />
-    <Compile Include="Canvas\Commands\CreateLineCommand.cs" />
+    <Compile Include="Commands\Canvas\CommandFactory.cs" />
+    <Compile Include="Commands\Canvas\Execute\CreateCanvasCommand.cs" />
+    <Compile Include="Commands\Canvas\Execute\CreateLineCommand.cs" />
     <Compile Include="Draws\CanvasDraw.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IDraw.cs" />
