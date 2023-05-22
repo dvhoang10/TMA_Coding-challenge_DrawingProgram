@@ -10,6 +10,11 @@ namespace DrawingProgram.Canvas.Commands
     {
         private PointItem _startPoint, _endPoint;
         private CanvasItem _canvas;
+        private enum typeOfLine
+        {
+            vertical,
+            horiziontal,
+        }
 
         public CreateLineCommand(CanvasItem canvas)
         {
@@ -32,6 +37,8 @@ namespace DrawingProgram.Canvas.Commands
                 throw new ArgumentException("Only accept positive integer values");
             if (x1 == 0 || y1 == 0 || x2 > _canvas.width - 2 || y2 > _canvas.height - 2)
                 throw new ArgumentException("Only accept points inside the canvas");
+            if (x1 != x2 && y1 != y2)
+                throw new ArgumentException("Only accept creating vertical and horizontal lines");
 
             _startPoint = new PointItem(x1, y1);
             _endPoint = new PointItem(x2, y2);
@@ -41,19 +48,35 @@ namespace DrawingProgram.Canvas.Commands
         {
             if (_startPoint.x == _endPoint.x)
             {
-                for (int i = _startPoint.y; i <= _endPoint.y; i++)
-                {
-                    _canvas.cells[_startPoint.x, i] = CanvasItem.lineChar;
-                }
+                if (_startPoint.y <= _endPoint.y) CreateLine(_startPoint, _endPoint, typeOfLine.vertical);
+                else CreateLine(_endPoint, _startPoint, typeOfLine.vertical);
             }
             else if (_startPoint.y == _endPoint.y)
             {
-                for (int i = _startPoint.x; i <= _endPoint.x; i++)
-                {
-                    _canvas.cells[i, _startPoint.y] = CanvasItem.lineChar;
-                }
+                if (_startPoint.x <= _endPoint.x) CreateLine(_startPoint, _endPoint, typeOfLine.horiziontal);
+                else CreateLine(_endPoint, _startPoint, typeOfLine.horiziontal);
             }
             return _canvas;
+        }
+
+        private void CreateLine(PointItem start, PointItem end, typeOfLine type)
+        {
+            switch (type)
+            {
+                case typeOfLine.vertical:
+                    for (int i = start.y; i <= end.y; i++)
+                    {
+                        _canvas.cells[start.x, i] = CanvasItem.lineChar;
+                    }
+                    break;
+                case typeOfLine.horiziontal:
+                    for (int i = start.x; i <= end.x; i++)
+                    {
+                        _canvas.cells[i, start.y] = CanvasItem.lineChar;
+                    }
+                    break;
+                default: break;
+            }
         }
     }
 }
