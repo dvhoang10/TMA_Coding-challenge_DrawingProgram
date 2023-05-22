@@ -30,8 +30,6 @@ namespace DrawingProgram.Canvas.Commands
                 || (!int.TryParse(cmd[2], out x2) || x2 < 0)
                 || (!int.TryParse(cmd[3], out y2) || y2 < 0))
                 throw new ArgumentException("Only accept positive integer values");
-            if (x1 > x2 || y1 > y2)
-                throw new ArgumentException("Please enter x1 < x2 & y1 < y2");
             if (x1 == 0 || y1 == 0 || x2 > _canvas.width - 2 || y2 > _canvas.height - 2)
                 throw new ArgumentException("Only accept points inside the canvas");
 
@@ -41,19 +39,29 @@ namespace DrawingProgram.Canvas.Commands
 
         public CanvasItem ExecuteCommand()
         {
-            for (int i = _startPoint.y; i <= _endPoint.y; i++)
+            if (_startPoint.x <= _endPoint.x && _startPoint.y <= _endPoint.y)
+                createRectangle(_startPoint, _endPoint);
+            else if (_startPoint.x > _endPoint.x && _startPoint.y > _endPoint.y) createRectangle(_endPoint, _startPoint);
+            else if (_startPoint.x < _endPoint.x)
+                createRectangle(new PointItem(_startPoint.x, _endPoint.y), new PointItem(_endPoint.x, _startPoint.y));
+            else createRectangle(new PointItem(_endPoint.x, _startPoint.y), new PointItem(_startPoint.x, _endPoint.y));
+            return _canvas;
+        }
+
+        private void createRectangle(PointItem start, PointItem end)
+        {
+            for (int i = start.y; i <= end.y; i++)
             {
-                for (int j = _startPoint.x; j <= _endPoint.x; j++)
+                for (int j = start.x; j <= end.x; j++)
                 {
-                    if (i == _startPoint.y || i == _endPoint.y
-                        || j == _startPoint.x || j == _endPoint.x)
+                    if (i == start.y || i == end.y
+                        || j == start.x || j == end.x)
                     {
                         _canvas.cells[j, i] = CanvasItem.lineChar;
                     }
                     else _canvas.cells[j, i] = ' ';
                 }
             }
-            return _canvas;
         }
     }
 }
