@@ -1,6 +1,7 @@
 ﻿using DrawingProgram.Interfaces;
 using DrawingProgram.Models;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,32 +42,26 @@ namespace DrawingProgram.Canvas.Commands
         {
             Queue<PointItem> queue = new Queue<PointItem>();
             queue.Enqueue(_point);
+            char targetColor = _canvas.cells[_point.x, _point.y];
 
             while (queue.Count > 0)
             {
-                var current = queue.Dequeue();
+                PointItem current = queue.Dequeue();
 
-                if (!CheckPointIsEmpty(current, _color)) continue;
-
-                _canvas.cells[current.x, current.y] = _color;
-                queue.Enqueue(new PointItem(current.x - 1, current.y));
-                queue.Enqueue(new PointItem(current.x + 1, current.y));
-                queue.Enqueue(new PointItem(current.x, current.y + 1));
-                queue.Enqueue(new PointItem(current.x, current.y - 1));
+                if (current.x > 0 && current.x < _canvas.width &&
+                  current.y > 0 && current.y < _canvas.height)
+                {
+                    if (_canvas.cells[current.x, current.y] == targetColor)
+                    {
+                        _canvas.cells[current.x, current.y] = _color;
+                        queue.Enqueue(new PointItem(current.x - 1, current.y));
+                        queue.Enqueue(new PointItem(current.x + 1, current.y));
+                        queue.Enqueue(new PointItem(current.x, current.y + 1));
+                        queue.Enqueue(new PointItem(current.x, current.y - 1));
+                    }
+                }
             }
             return _canvas;
-        }
-
-        private bool CheckPointIsEmpty(PointItem point, char color)
-        {
-            if (_canvas.cells[point.x, point.y] == color ||
-                _canvas.cells[point.x, point.y] == CanvasItem.lineChar ||
-                _canvas.cells[point.x, point.y] == CanvasItem.verticalChar ||
-                _canvas.cells[point.x, point.y] == CanvasItem.horizontalChar)
-            {
-                return false;
-            }
-            return true;
         }
     }
 }
